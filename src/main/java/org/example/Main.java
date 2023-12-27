@@ -19,8 +19,6 @@ public class Main {
                          break;
                 case 2 : Data.setStart(false);
                          break;
-                default:
-                    System.out.println("One not recognize...!");
             }
 
         }
