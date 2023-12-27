@@ -11,13 +11,11 @@ public class Main {
         System.out.println("Welcome to KB stopWatch.....!");
         System.out.println("-----------------------------------------------------------------------------");
         while(Data.isStart()){
-            Calculation calculation = new Calculation(scanner);
+            Calculation calculation = new Calculation(scanner,1);
             System.out.print("\n1 to Start\n2 to exit\nEnter the choice : ");
             int choice = scanner.nextInt();
             switch(choice){
-                case 1 :
-                    System.out.println("helo");
-                         calculation.start();
+                case 1 : calculation.start();
                          break;
                 case 2 : Data.setStart(false);
                          break;

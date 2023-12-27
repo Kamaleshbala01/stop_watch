@@ -4,10 +4,12 @@ import java.util.Scanner;
 
 public class Calculation {
     private boolean flag = true;
-    private Scanner scanner;
+    private int lapCount = 0;
+    private final Scanner scanner;
 
-    public Calculation(Scanner scanner) {
+    public Calculation(Scanner scanner,int lapCount) {
         this.scanner = scanner;
+        this.lapCount = lapCount;
     }
 
     public void start() {
@@ -16,12 +18,14 @@ public class Calculation {
             System.out.print("\n1 for lap\n2 for pause\n3 for exit\nEnter your choice : ");
             int choice = scanner.nextInt();
             switch (choice) {
-                case 1:
-                    performLap();
-                    break;
-                case 2:
-                    performPause();
-                    break;
+                case 1: performLap();
+                        break;
+                case 2: System.out.println("\nYou Paused the stop Watch.....!");
+                        Data.setEndTime(System.currentTimeMillis());
+                        Data.setMilliseconds(Data.getMilliseconds()+Data.getEndTime()-Data.getStartTime());
+                        getCalculation();
+                        performPause();
+                        break;
                 case 3:
                     flag = false;
                     Data.setStart(false);
@@ -31,8 +35,7 @@ public class Calculation {
     }
 
     private void performLap() {
-        int count = 0;
-        System.out.println("lap : " + count++);
+        System.out.println("lap : " + lapCount++);
         Data.setEndTime(System.currentTimeMillis());
         Data.setMilliseconds(Data.getMilliseconds() + Data.getEndTime() - Data.getStartTime());
         getCalculation();
@@ -40,6 +43,7 @@ public class Calculation {
     }
 
     private void performPause() {
+        boolean test = false;
         while (flag) {
             System.out.print("1 for resume\n2 for Reset\n3 for exit\nEnter your choice : ");
             int choice = scanner.nextInt();
@@ -47,6 +51,7 @@ public class Calculation {
                 case 1:
                     System.out.println("\nYou Resume the stop watch ....!");
                     Data.setStartTime(System.currentTimeMillis());
+                    test = true;
                     break;
                 case 2:
                     System.out.println("\nYou Reset the Stop Watch....!");
@@ -58,6 +63,7 @@ public class Calculation {
                     Data.setStart(false);
                     break;
             }
+            if(test) break;
         }
     }
 
